@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieViewController: UIViewController, UITableViewDelegate {
+class MovieViewController: UIViewController {
     var movies: [Movie] = [] {
         didSet {
             tableView.reloadData()
@@ -65,4 +65,9 @@ extension MovieViewController: UITableViewDataSource {
     }
 }
 
-
+extension MovieViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MovieDetailViewController(with: movies[indexPath.row].imdbID)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
